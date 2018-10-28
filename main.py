@@ -32,7 +32,7 @@ def validate_signup():
     """username verification"""
     if username == "":
         username_error = "Please fill out a username."
-    elif len(username) <= 3 or len(username) > 20:
+    elif len(username) < 3 or len(username) > 20:
         username_error = "Not a valid username. Must be between 3 and 20 characters long."
         username = ""
     elif " " in username:
@@ -42,19 +42,21 @@ def validate_signup():
     """password varification"""
     if password == "":
         password_error = "Please fill out a password."
-    elif len(password) <= 3 or len(password) > 20:
+    elif len(password) < 3 or len(password) > 20:
         password_error = "Not a valid password. Must be between 3 and 20 characters long."
     elif " " in password:
         password_error = "Password cannot have any spaces."
 
     """2nd password entered verification"""
-    if not password_error:
-        if verify_password == "" or verify_password != password:
-            verify_password_error = "Passwords do not match."
+    #if not password_error:
+    if verify_password == "":
+        verify_password_error = "Please re-enter password."
+    elif verify_password != password:
+        verify_password_error = "Passwords do not match."
 
     """email verification"""
     if email != "":
-        if len(email) <= 3 or len(email) > 20:
+        if len(email) < 3 or len(email) > 20:
             email_error = "Not a valid email. Ensure email is greater than 3 and less than 20 characters."
 
         match = re.match('^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$', email)
